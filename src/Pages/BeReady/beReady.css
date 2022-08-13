@@ -1,0 +1,53 @@
+.be-ready {
+    position: relative;
+    height: 100vh;
+}
+
+.be-ready__astronaut-img {
+    width: 400px;
+}
+
+.loading-circle {
+    margin: 40px 0;
+}
+
+.be-ready__title-text {
+    font-weight: 400;
+    font-size: 100px;
+    line-height: 126px;
+    color: #FF9900;
+}
+
+.ready-title {
+    padding-top: 100px;
+}
+
+.ready-title__text {
+    font-weight: 400;
+    font-size: 75px;
+    line-height: 94px;
+    color: #FF9900;
+}
+
+.ready-title__loading-text {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 68px;
+    color: #FF9900;
+}
+
+.footer {
+    position: absolute;
+    background: #FFFFFF;
+    bottom: 0;
+    width: 100vw;
+    padding: 20px;
+}
+
+.footer-nickname {
+    font-weight: 400;
+    font-size: 65px;
+    line-height: 88px;
+    color: #000000;
+    text-align: start;
+}
