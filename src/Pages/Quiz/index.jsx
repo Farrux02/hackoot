@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./quiz.css";
 import { Logo } from "../../Assets/images";
 import { Button } from "@mui/material";
@@ -18,11 +18,14 @@ const Quiz = () => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [correctAnsw, setCorrectAnsw] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
-  // const [userValues, setUserValues] = useState({
-  //   points: 
-  // });
 
-  console.log(userRedux[0]);
+  const userValues = {
+    user_name: isNicknameRedux,
+    points: userRedux[0].points,
+  };
+  const [values, setValues] = useState(userValues);
+
+  console.log(userRedux[0].points);
 
   const scorePerAnswer = 10;
 
@@ -38,20 +41,26 @@ const Quiz = () => {
 
   const [incorrectAnsw, setInCorrectAnsw] = useState(quiz[0].questions.length);
 
-  const getQuizList = () => {
-    axios
-      .get(`https://12e0-87-237-239-49.in.ngrok.io/quiz/`)
-      .then((res) => console.log(res.data));
-  };
+  // const getQuizList = () => {
+  //   axios
+  //     .get(`https://12e0-87-237-239-49.in.ngrok.io/quiz/`)
+  //     .then((res) => console.log(res.data));
+  // };
 
-  useEffect(() => {
-    getQuizList();
-  }, []);
+  // useEffect(() => {
+  //   getQuizList();
+  // }, []);
 
   useEffect(() => {
     setTotalScore(scorePerAnswer * correctAnsw);
-    dispatch(user());
-  }, [correctAnsw, dispatch]);
+    console.log(values);
+  }, [correctAnsw, values]);
+
+  useMemo(() => {
+    return setValues({ ...values, points: totalScore });
+  }, [totalScore]);
+
+  // dispatch(user(values))
 
   const isQuizFinished = () => {
     return activeQuestion + 1 === quiz[0].questions.length;
@@ -63,9 +72,10 @@ const Quiz = () => {
     if (question.rightAnswerId === answerId) {
       setCorrectAnsw(correctAnsw + 1);
       setInCorrectAnsw(incorrectAnsw - 1);
-      console.log(quiz[0].questions.length);
+      // console.log(quiz[0].questions.length);
       if (isQuizFinished()) {
         setIsFinished(true);
+        dispatch(user(values))
       } else {
         setIsCorrect({ [answerId]: "correct-answer" });
         setTimeout(() => {
