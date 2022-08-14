@@ -15,7 +15,8 @@
     font-weight: 400;
     font-size: 100px;
     line-height: 126px;
-    color: #FF9900;
+    color: #F44516;
+    text-align: center;
 }
 
 .ready-title {
@@ -26,14 +27,16 @@
     font-weight: 400;
     font-size: 75px;
     line-height: 94px;
-    color: #FF9900;
+    color: #F44516;
+    text-align: center;
 }
 
 .ready-title__loading-text {
     font-weight: 400;
     font-size: 50px;
     line-height: 68px;
-    color: #FF9900;
+    color: #F44516;
+    text-align: center;
 }
 
 .footer {
@@ -49,4 +52,9 @@
     line-height: 88px;
     color: #000000;
     text-align: start;
+}
+
+.footer-score {
+    font-size: 30px;
+    padding: 10px;
 }

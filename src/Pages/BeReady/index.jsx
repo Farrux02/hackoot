@@ -3,9 +3,22 @@ import { Astronaut } from "../../Assets/images";
 import Button from "../../Components/Button";
 import LoadingCircle from "../../Components/LoadingCircle";
 import "./beReady.css";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const BeReady = () => {
   const [isStarted, setIsStarted] = useState(false);
+  const redirect = useNavigate();
+  const nickname = useSelector(state => state.nickname.nickname)
+
+  const { quiz_id } = useParams();
+
+  if (isStarted) {
+    setTimeout(() => {
+      redirect(`/quiz/${quiz_id}`);
+    }, 3000);
+  }
 
   return (
     <div className="be-ready">
@@ -35,15 +48,17 @@ const BeReady = () => {
           </div>
         </div>
       )}
-      <div className="footer flex justify-between">
-        <div className="footer-nickname">Nickname</div>
-        <Button
-          className="footer-nickname"
-          title="Start"
-          onClick={() => {
-            setIsStarted(true);
-          }}
-        />
+      <div className="footer">
+        <div className="container flex justify-between">
+          <div className="footer-nickname">{nickname}</div>
+          <Button
+            className="footer-nickname"
+            title="Start"
+            onClick={() => {
+              setIsStarted(true);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

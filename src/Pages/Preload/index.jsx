@@ -5,13 +5,20 @@ import FormInput from "../../Components/FormInput";
 import "./preload.css";
 import { useDispatch, useSelector } from "react-redux";
 import { isNickname } from "../../redux/reducers/nicknameReducer";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { user } from "../../redux/reducers/userReducer";
 
 const Preload = () => {
   const [isInGame, setIsInGame] = useState(false);
-  const gamePin = useRef(Math.floor(Math.random() * 9999999 + 1111111));
+  const gamePinGenerator = useRef(
+    Math.floor(Math.random() * 9999999 + 1111111)
+  );
+  const { quiz_id } = useParams();
+  const [gamePin, setGamePin] = useState("");
   const inputsValues = {
-    gamePin: "",
-    nickName: "",
+    user_name: "",
+    points: 0,
   };
   const [values, setValues] = useState(inputsValues);
 
@@ -21,7 +28,7 @@ const Preload = () => {
 
   console.log(isNicknameRedux);
 
-  console.log(gamePin.current);
+  console.log(gamePinGenerator.current);
   return (
     <section className="preload">
       <div className="container">
@@ -37,10 +44,11 @@ const Preload = () => {
                 placeholder="Enter game PIN"
                 className="preload-input"
                 name="gamePin"
-                value={values.gamePin}
+                value={gamePin}
                 maxLength={7}
                 handleChange={(e) => {
-                  setValues({ ...values, gamePin: e.target.value });
+                  // setValues({ ...values, gamePin: e.target.value });
+                  setGamePin(e.target.value);
                 }}
               />
               <Button
@@ -48,7 +56,7 @@ const Preload = () => {
                 className="preload-button"
                 onClick={(e) => {
                   e.preventDefault();
-                  gamePin.current === +values.gamePin && setIsInGame(true);
+                  gamePinGenerator.current === +gamePin && setIsInGame(true);
                 }}
               />
             </form>
@@ -62,20 +70,25 @@ const Preload = () => {
                 placeholder="Nickname"
                 className="preload-input"
                 name="nickName"
-                value={values.nickName}
-                maxLength={7}
+                value={values.user_name}
                 handleChange={(e) => {
-                  setValues({ ...values, nickName: e.target.value });
+                  setValues({ ...values, user_name: e.target.value });
                 }}
               />
-              <Button
-                title="Enter"
+              <button
                 className="preload-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(isNickname(values.nickName))
-                }}
-              />
+                onClick={(e) => e.preventDefault()}
+              >
+                <Link
+                  to={`/ready/${quiz_id}`}
+                  onClick={() => {
+                    dispatch(isNickname(values.user_name));
+                    dispatch(user(values));
+                  }}
+                >
+                  Enter
+                </Link>
+              </button>
             </form>
           </div>
         )}

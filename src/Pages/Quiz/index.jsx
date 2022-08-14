@@ -4,107 +4,66 @@ import { Logo } from "../../Assets/images";
 import { Button } from "@mui/material";
 import ActiveQuiz from "../../Components/ActiveQuiz";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import isCorrectReducer from "../../redux/reducers/isCorrectReducer";
+import user from "../../redux/reducers/userReducer";
 import axios from "axios";
 
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [seconds, setSeconds] = useState(20);
   const isNicknameRedux = useSelector((state) => state.nickname.nickname);
+  const userRedux = useSelector((state) => state.user.user);
   const [isFinished, setIsFinished] = useState(false);
   const [isCorrect, setIsCorrect] = useState(null);
   const [correctAnsw, setCorrectAnsw] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
+  // const [userValues, setUserValues] = useState({
+  //   points: 
+  // });
+
+  console.log(userRedux[0]);
 
   const scorePerAnswer = 10;
+
+  const { quiz_id } = useParams();
 
   const dispatch = useDispatch();
   console.log(isCorrect);
 
-  const [quiz, setQuiz] = useState([
-    {
-      question: "Какого цвета небо?",
-      rightAnswerId: 2,
-      id: 1,
-      answers: [
-        { text: "Черный", id: 1 },
-        { text: "Синий", id: 2 },
-        { text: "Красный", id: 3 },
-        { text: "Зеленый", id: 4 },
-      ],
-    },
-    {
-      question: "В каком году основали Санкт-Петербург?",
-      rightAnswerId: 3,
-      id: 2,
-      answers: [
-        { text: "1700", id: 1 },
-        { text: "1702", id: 2 },
-        { text: "1703", id: 3 },
-        { text: "1803", id: 4 },
-      ],
-    },
-    {
-      question: "Столица Франции?",
-      rightAnswerId: 1,
-      id: 3,
-      answers: [
-        { text: "Париж", id: 1 },
-        { text: "Люксембург", id: 2 },
-        { text: "Марсель", id: 3 },
-        { text: "Лилль", id: 4 },
-      ],
-    },
-    {
-      question: "Сколько месяцев в году имеют 27 дней?",
-      rightAnswerId: 3,
-      id: 4,
-      answers: [
-        { text: "Один", id: 1 },
-        { text: "Три", id: 2 },
-        { text: "Двеннадцать", id: 3 },
-        { text: "Пять", id: 4 },
-      ],
-    },
-    {
-      question: "Сколько людей основали MARS IT School?",
-      rightAnswerId: 3,
-      id: 4,
-      answers: [
-        { text: "Один", id: 1 },
-        { text: "Два", id: 2 },
-        { text: "Три", id: 3 },
-        { text: "Пять", id: 4 },
-      ],
-    },
-  ]);
-  const [incorrectAnsw, setInCorrectAnsw] = useState(quiz.length);
+  const quizRedux = useSelector((state) => state.quiz.quiz);
+  const quiz = quizRedux.filter((quizList) => quizList.id === +quiz_id);
 
-  // const getQuizList = () => {
-  //   axios
-  //     .get(`https://12e0-87-237-239-49.in.ngrok.io/quiz/`)
-  //     .then((res) => console.log(res.data));
-  // };
+  console.log(quiz[0].questions.length);
 
-  // useEffect(() => {
-  //   getQuizList();
-  // }, []);
+  const [incorrectAnsw, setInCorrectAnsw] = useState(quiz[0].questions.length);
+
+  const getQuizList = () => {
+    axios
+      .get(`https://12e0-87-237-239-49.in.ngrok.io/quiz/`)
+      .then((res) => console.log(res.data));
+  };
+
+  useEffect(() => {
+    getQuizList();
+  }, []);
 
   useEffect(() => {
     setTotalScore(scorePerAnswer * correctAnsw);
-  }, [correctAnsw]);
+    dispatch(user());
+  }, [correctAnsw, dispatch]);
 
   const isQuizFinished = () => {
-    return activeQuestion + 1 === quiz.length;
+    return activeQuestion + 1 === quiz[0].questions.length;
   };
 
   const onAnswerClickHandler = (answerId) => {
-    const question = quiz[activeQuestion];
+    const question = quiz[0].questions[activeQuestion];
     console.log(activeQuestion);
     if (question.rightAnswerId === answerId) {
       setCorrectAnsw(correctAnsw + 1);
       setInCorrectAnsw(incorrectAnsw - 1);
-      console.log(quiz.length);
+      console.log(quiz[0].questions.length);
       if (isQuizFinished()) {
         setIsFinished(true);
       } else {
@@ -140,7 +99,7 @@ const Quiz = () => {
         ) : (
           <>
             <div className="answer-number">
-              {activeQuestion + 1}/{quiz.length}
+              {activeQuestion + 1}/{quiz[0].questions.length}
             </div>
             <div className="question-time flex items-center justify-center">
               {seconds}
@@ -150,8 +109,8 @@ const Quiz = () => {
             </div>
             <div className="quiz-wrapper">
               <ActiveQuiz
-                question={quiz[activeQuestion].question}
-                answers={quiz[activeQuestion].answers}
+                question={quiz[0].questions[activeQuestion].question}
+                answers={quiz[0].questions[activeQuestion].answers}
                 isCorrect={isCorrect}
                 onAnswerClick={onAnswerClickHandler}
                 answerState={isCorrect}
@@ -160,8 +119,12 @@ const Quiz = () => {
           </>
         )}
       </div>
-      <div className="footer flex justify-between">
-        <div className="footer-nickname">{isNicknameRedux}</div>
+      <div className="footer">
+        <div className="container flex justify-between">
+          <div className="footer-nickname">{isNicknameRedux}</div>
+          {/* <div className="footer-score">{userRedux[0].points}</div> */}
+          <div className="footer-score">299</div>
+        </div>
       </div>
     </div>
   );
