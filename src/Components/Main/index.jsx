@@ -3,6 +3,7 @@ import Preload from "../../Pages/Preload";
 import BeReady from "../../Pages/BeReady";
 import Quiz from "../../Pages/Quiz";
 import { useSelector } from "react-redux";
+import AdminPanel from "../../Pages/AdminPanel";
 
 const Main = () => {
   const isNicknameRedux = useSelector((state) => state.nickname.nickname);
@@ -30,7 +31,8 @@ const Main = () => {
       ) :  isNicknameRedux !== null ? (
         <Quiz />
       ) : null} */}
-      <Quiz/>
+      {/* <Quiz/> */}
+      <AdminPanel />
     </main>
   );
 };

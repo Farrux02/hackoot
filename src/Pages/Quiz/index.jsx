@@ -14,7 +14,9 @@ const Quiz = () => {
   const [isFinished, setIsFinished] = useState(false);
   const [isCorrect, setIsCorrect] = useState(null);
   const [correctAnsw, setCorrectAnsw] = useState(0);
-  const [incorrectAnsw, setInCorrectAnsw] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
+
+  const scorePerAnswer = 10;
 
   const dispatch = useDispatch();
   console.log(isCorrect);
@@ -76,8 +78,7 @@ const Quiz = () => {
       ],
     },
   ]);
-
-  console.log(quiz.length);
+  const [incorrectAnsw, setInCorrectAnsw] = useState(quiz.length);
 
   // const getQuizList = () => {
   //   axios
@@ -89,6 +90,10 @@ const Quiz = () => {
   //   getQuizList();
   // }, []);
 
+  useEffect(() => {
+    setTotalScore(scorePerAnswer * correctAnsw);
+  }, [correctAnsw]);
+
   const isQuizFinished = () => {
     return activeQuestion + 1 === quiz.length;
   };
@@ -98,7 +103,8 @@ const Quiz = () => {
     console.log(activeQuestion);
     if (question.rightAnswerId === answerId) {
       setCorrectAnsw(correctAnsw + 1);
-      setInCorrectAnsw(quiz.length - correctAnsw);
+      setInCorrectAnsw(incorrectAnsw - 1);
+      console.log(quiz.length);
       if (isQuizFinished()) {
         setIsFinished(true);
       } else {
@@ -129,6 +135,7 @@ const Quiz = () => {
           <>
             <h1>Correct: {correctAnsw}</h1>
             <h1>Incorrect: {incorrectAnsw}</h1>
+            <p>Your score: {totalScore}</p>
           </>
         ) : (
           <>
