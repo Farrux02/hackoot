@@ -29,3 +29,11 @@ code {
   max-width: 1440px;
   margin: 0 auto;
 }
+
+.correct-answer {
+  background-color: green !important; 
+}
+
+.incorrect-answer {
+  background-color: red !important; 
+}

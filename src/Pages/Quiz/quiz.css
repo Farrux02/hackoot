@@ -54,7 +54,8 @@
 
 .quiz-answer {
     width: 490px;
-    background: linear-gradient(0deg, #FF0000, #FF0000), #FF0000;
+    /* background: linear-gradient(0deg, #FF0000, #FF0000), #FF0000; */
+    background-color: darkcyan;
     border-radius: 10px;
     color: #fff;
     font-size: 40px;
@@ -72,9 +73,11 @@
 .quiz-answer__2 {
     background: linear-gradient(0deg, #00FF19, #00FF19), #FF0000;
 }
+
 .quiz-answer__3 {
     background: linear-gradient(0deg, #FAFF00, #FAFF00), #FF0000;
 }
+
 .quiz-answer__4 {
     background: linear-gradient(0deg, #000000, #000000), #FF0000;
 }
