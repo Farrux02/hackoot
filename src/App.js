@@ -9,7 +9,7 @@ import AdminPanel from "./Pages/AdminPanel";
 function App() {
   return (
     <>
-      <Router>
+      <Router basename="/">
         <Routes>
           <Route path="/" element={<AdminPanel/>} />
           <Route path="/preload/:quiz_id" element={<Preload/>} />
