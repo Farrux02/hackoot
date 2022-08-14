@@ -3,6 +3,8 @@ import Button from "../../Components/Button";
 import { Logo } from "../../Assets/images";
 import FormInput from "../../Components/FormInput";
 import "./preload.css";
+import { useDispatch, useSelector } from "react-redux";
+import { isNickname } from "../../redux/reducers/nicknameReducer";
 
 const Preload = () => {
   const [isInGame, setIsInGame] = useState(false);
@@ -12,6 +14,12 @@ const Preload = () => {
     nickName: "",
   };
   const [values, setValues] = useState(inputsValues);
+
+  const isNicknameRedux = useSelector((state) => state.nickname.nickname);
+
+  const dispatch = useDispatch();
+
+  console.log(isNicknameRedux);
 
   console.log(gamePin.current);
   return (
@@ -39,8 +47,8 @@ const Preload = () => {
                 title="Enter"
                 className="preload-button"
                 onClick={(e) => {
-                    e.preventDefault();
-                    gamePin.current === +values.gamePin && setIsInGame(true);
+                  e.preventDefault();
+                  gamePin.current === +values.gamePin && setIsInGame(true);
                 }}
               />
             </form>
@@ -60,9 +68,14 @@ const Preload = () => {
                   setValues({ ...values, nickName: e.target.value });
                 }}
               />
-              <Button title="Enter" className="preload-button" onClick={(e) => {
-                e.preventDefault();
-              }} />
+              <Button
+                title="Enter"
+                className="preload-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(isNickname(values.nickName))
+                }}
+              />
             </form>
           </div>
         )}

@@ -1,5 +1,6 @@
 .quiz {
     position: relative;
+    height: 100vh;
 }
 
 .answer-number {
@@ -16,6 +17,7 @@
     font-weight: 400;
     font-size: 30px;
     left: 50%;
+    transform: translate(-50%, -50%);
     top: 60px;
     width: 70px;
     height: 70px;
@@ -48,13 +50,31 @@
 
 .quiz-answers {
     padding-top: 380px;
-    width: 1100px;
 }
 
 .quiz-answer {
-    width: 450px;
-    height: 80px;
+    width: 490px;
     background: linear-gradient(0deg, #FF0000, #FF0000), #FF0000;
-    border-radius: 15px;
-    border: 1px solid #000;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 40px;
+    padding: 20px 0;
+}
+
+.quiz-answer:hover {
+    cursor: pointer;
+}
+
+.quiz-answer:active {
+    box-shadow: 1px 1px 1px 1px #888888;
+}
+
+.quiz-answer__2 {
+    background: linear-gradient(0deg, #00FF19, #00FF19), #FF0000;
+}
+.quiz-answer__3 {
+    background: linear-gradient(0deg, #FAFF00, #FAFF00), #FF0000;
+}
+.quiz-answer__4 {
+    background: linear-gradient(0deg, #000000, #000000), #FF0000;
 }

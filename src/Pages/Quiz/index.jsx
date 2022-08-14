@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./quiz.css";
 import { Logo } from "../../Assets/images";
+import { Button } from "@mui/material";
+import ActiveQuiz from "../../Components/ActiveQuiz";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [seconds, setSeconds] = useState(20);
+  const isNicknameRedux = useSelector((state) => state.nickname.nickname);
   const [quiz, setQuiz] = useState([
     {
       question: "Какого цвета небо?",
@@ -30,25 +35,38 @@ const Quiz = () => {
     },
   ]);
 
+
+
+  const onAnswerClickHandler = (answerId) => {
+    console.log("Answer Id: ", answerId);
+
+    if (quiz[activeQuestion].rightAnswerId === answerId) {
+      setActiveQuestion(activeQuestion + 1);
+    }
+  };
+
   return (
     <div className="quiz">
-      <div className="answer-number">
-        {activeQuestion + 1}/{quiz.length}
-      </div>
-      <div className="question-time flex items-center justify-center">
-        {seconds}
-      </div>
-      <div className="quiz-logo">
-        <img className="quiz-logo__img" src={Logo} alt="logo" />
-      </div>
-      <div className="quiz-wrapper">
-        <div className="quiz-question">Is hakoot the best project?</div>
-        <div className="quiz-answers flex flex-wrap justify-center">
-            <div className="quiz-answer quiz-answer__1"></div>
-            <div className="quiz-answer quiz-answer__2"></div>
-            <div className="quiz-answer quiz-answer__3"></div>
-            <div className="quiz-answer quiz-answer__4"></div>
+      <div className="container">
+        <div className="answer-number">
+          {activeQuestion + 1}/{quiz.length}
         </div>
+        <div className="question-time flex items-center justify-center">
+          {seconds}
+        </div>
+        <div className="quiz-logo">
+          <img className="quiz-logo__img" src={Logo} alt="logo" />
+        </div>
+        <div className="quiz-wrapper">
+          <ActiveQuiz
+            question={quiz[activeQuestion].question}
+            answers={quiz[activeQuestion].answers}
+            onAnswerClick={onAnswerClickHandler}
+          />
+        </div>
+      </div>
+      <div className="footer flex justify-between">
+        <div className="footer-nickname">{isNicknameRedux}</div>
       </div>
     </div>
   );

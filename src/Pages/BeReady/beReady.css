@@ -41,12 +41,11 @@
     background: #FFFFFF;
     bottom: 0;
     width: 100vw;
-    padding: 20px;
 }
 
 .footer-nickname {
     font-weight: 400;
-    font-size: 65px;
+    font-size: 30px;
     line-height: 88px;
     color: #000000;
     text-align: start;

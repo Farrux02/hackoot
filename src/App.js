@@ -1,4 +1,5 @@
 import "./App.css";
+import Main from "./Components/Main";
 import BeReady from "./Pages/BeReady";
 import Preload from "./Pages/Preload";
 import Quiz from "./Pages/Quiz";
@@ -8,7 +9,7 @@ function App() {
     <div className="App">
       {/* <Preload/> */}
       {/* <BeReady /> */}
-      <Quiz />
+      <Main />
     </div>
   );
 }
