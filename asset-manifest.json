@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/hackoot/static/css/main.9906e1fc.css",
+    "main.js": "/hackoot/static/js/main.a5fb05f5.js",
+    "static/media/youre-in-img.png": "/hackoot/static/media/youre-in-img.a70cd660f4d98ed28567.png",
+    "static/media/hAKOOT-logo.png": "/hackoot/static/media/hAKOOT-logo.4c22874336218e6e81d7.png",
+    "index.html": "/hackoot/index.html",
+    "main.9906e1fc.css.map": "/hackoot/static/css/main.9906e1fc.css.map",
+    "main.a5fb05f5.js.map": "/hackoot/static/js/main.a5fb05f5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9906e1fc.css",
+    "static/js/main.a5fb05f5.js"
+  ]
+}
