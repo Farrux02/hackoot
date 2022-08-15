@@ -56,9 +56,9 @@ const Quiz = () => {
     console.log(values);
   }, [correctAnsw, values]);
 
-  useMemo(() => {
-    return setValues({ ...values, points: totalScore });
-  }, [totalScore]);
+  // useMemo(() => {
+  //   return setValues({ ...values, points: totalScore });
+  // }, [totalScore, values]);
 
   // dispatch(user(values))
 
@@ -75,7 +75,7 @@ const Quiz = () => {
       // console.log(quiz[0].questions.length);
       if (isQuizFinished()) {
         setIsFinished(true);
-        dispatch(user(values))
+        // dispatch(user(values))
       } else {
         setIsCorrect({ [answerId]: "correct-answer" });
         setTimeout(() => {

@@ -14,9 +14,9 @@ const getQuestions = (quiz_id) => {
     });
 };
 
-const postUser = () => {
+const postUser = (user_id) => {
     axios
-      .get(`https://12e0-87-237-239-49.in.ngrok.io/user/`)
+      .get(`https://12e0-87-237-239-49.in.ngrok.io/user/${user_id}`)
       .then((res) => {
         return res.data;
       });
