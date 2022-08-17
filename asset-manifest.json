@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.9906e1fc.css",
-    "main.js": "/static/js/main.72212cb4.js",
+    "main.js": "/static/js/main.97aba077.js",
     "static/media/youre-in-img.png": "/static/media/youre-in-img.a70cd660f4d98ed28567.png",
     "static/media/hAKOOT-logo.png": "/static/media/hAKOOT-logo.4c22874336218e6e81d7.png",
     "index.html": "/index.html",
     "main.9906e1fc.css.map": "/static/css/main.9906e1fc.css.map",
-    "main.72212cb4.js.map": "/static/js/main.72212cb4.js.map"
+    "main.97aba077.js.map": "/static/js/main.97aba077.js.map"
   },
   "entrypoints": [
     "static/css/main.9906e1fc.css",
-    "static/js/main.72212cb4.js"
+    "static/js/main.97aba077.js"
   ]
 }
